@@ -96,8 +96,7 @@ Assurez-vous d'être placé dans le répertoire `database-creation`.
 
 Exécutez une requête simple pour vérifier que la base est bien remplie :
 ```sql
-SELECT * FROM pays;
-SELECT * FROM catastrophe;
+SELECT * FROM country;
 ```
 
 ---
