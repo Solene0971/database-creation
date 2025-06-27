@@ -16,18 +16,23 @@ Ce projet avait pour but de concevoir une base de données relationnelle permett
 
 ## Technologies utilisées
 
-- Base de données : MySQL
-- Outils : pgModeler, Terminal MySQL, postgreSQL
+- Outils : pgModeler, postgreSQL
 - Langage SQL : Création de tables, requêtes SQL, relations entre données
 
 
 ## Installation
 
-Cloner le dépôt :
+1. Cloner le dépôt :
 
    ```bash
    git clone https://github.com/Solene0971/database-creation.git
-   ```
+   cd database-creation
+
+2. Lancer les scripts dans une base de données :
+   ```bash
+   \i src/script_database.sql
+   \i src/script_peuplement.sql
+
 
 ## Auteurs
 >Solène Bourg [@Solene0971](https://github.com/Solene0971/)  
