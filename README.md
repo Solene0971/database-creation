@@ -28,21 +28,20 @@ L’objectif de ce projet était de concevoir une base de données relationnelle
 
 ### 1. Prérequis
 - **PostgreSQL** (version ≥ 14 recommandée)
-- (Optionnel) **pgAdmin** : Interface graphique pour gérer PostgreSQL.
 
 ---
 
-### 2. Installation de PostgreSQL
+### 2. Cloner le projet
 
-#### Sous Windows
-1. Télécharger PostgreSQL depuis : [https://www.postgresql.org/download/windows/](https://www.postgresql.org/download/windows/)
-2. Lancer l’installeur et suivre les instructions.
-3. Pendant l'installation :
-   - Définir un mot de passe pour l’utilisateur `postgres` (notez-le, vous en aurez besoin pour vous connecter).
-   - Laisser les paramètres par défaut.
-4. Une fois installé, vous pouvez :
-   - Utiliser **SQL Shell (psql)** pour exécuter les scripts via le terminal PostgreSQL.
-   - Ou utiliser **pgAdmin** pour gérer visuellement la base.
+Dans votre terminal, exécutez :
+```bash
+git clone https://github.com/Solene0971/database-creation.git
+cd database-creation
+```
+
+---
+
+### 3. Installation de PostgreSQL (Optionnel si vous êtes déjà équipé)
 
 #### Sous Linux (Debian/Ubuntu)
 1. Ouvrir un terminal et exécuter :
@@ -65,27 +64,35 @@ psql
 
 ---
 
-### 3. Cloner le projet
 
-Dans votre terminal, exécutez :
-```bash
-git clone https://github.com/Solene0971/database-creation.git
-cd database-creation
+### 4. Création de la base de données
+
+Avant de lancer les scripts, il faut créer une base de données PostgreSQL.  
+Dans le terminal PostgreSQL (`psql`), exécutez la commande suivante :
+
+```sql
+CREATE DATABASE catastrophes;
+```
+
+Ensuite, connectez-vous à la base nouvellement créée :
+
+```sql
+\c catastrophes
 ```
 
 ---
 
-### 4. Création et peuplement de la base de données
+### 5. Création et peuplement de la base de données
 
-Dans le terminal PostgreSQL (`psql`) :
+Dans la base `catastrophes`, exécutez :
 ```sql
 \i src/script_database.sql
 \i src/script_peuplement.sql
 ```
-
+Assurez-vous d'être placé dans le répertoire `database-creation`.
 ---
 
-### 5. Vérification
+### 6. Vérification
 
 Exécutez une requête simple pour vérifier que la base est bien remplie :
 ```sql
@@ -94,6 +101,7 @@ SELECT * FROM catastrophe;
 ```
 
 ---
+
 
 ### Auteur
 
