@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="6"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="sae" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="COUNTRY" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="460"/>
+	<column name="country_code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="ISO2">
+		<type name="char" length="2"/>
+	</column>
+	<column name="ISO3">
+		<type name="char" length="2"/>
+	</column>
+	<column name="sub_region_code">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="COUNTRY_pk" type="pk-constr" table="public.&quot;COUNTRY&quot;">
+		<columns names="country_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="DISASTER" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1220" y="500"/>
+	<column name="disaster_code" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="disaster" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="DISASTER_pk" type="pk-constr" table="public.&quot;DISASTER&quot;">
+		<columns names="disaster_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="CLIMATE_DISASTER" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="460"/>
+	<column name="country_code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="disaster_code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="year" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="number">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="CLIMATE_DISASTER_pk" type="pk-constr" table="public.&quot;CLIMATE_DISASTER&quot;">
+		<columns names="country_code,disaster_code,year" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="SUB_REGION" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="600" y="180"/>
+	<column name="sub_region_code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="region_code">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="SUB_REGION_pk" type="pk-constr" table="public.&quot;SUB_REGION&quot;">
+		<columns names="sub_region_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="REGION" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="200"/>
+	<column name="region_code" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="REGION_pk" type="pk-constr" table="public.&quot;REGION&quot;">
+		<columns names="region_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="sub_region_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="SET NULL" ref-table="public.&quot;SUB_REGION&quot;" table="public.&quot;COUNTRY&quot;">
+	<columns names="sub_region_code" ref-type="src-columns"/>
+	<columns names="sub_region_code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="country_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.&quot;COUNTRY&quot;" table="public.&quot;CLIMATE_DISASTER&quot;">
+	<columns names="country_code" ref-type="src-columns"/>
+	<columns names="country_code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="disaster_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.&quot;DISASTER&quot;" table="public.&quot;CLIMATE_DISASTER&quot;">
+	<columns names="disaster_code" ref-type="src-columns"/>
+	<columns names="disaster_code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="region_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="SET NULL" ref-table="public.&quot;REGION&quot;" table="public.&quot;SUB_REGION&quot;">
+	<columns names="region_code" ref-type="src-columns"/>
+	<columns names="region_code" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_CLIMATE_DISASTER_COUNTRY" type="relfk" layers="0"
+	 src-table="public.&quot;CLIMATE_DISASTER&quot;"
+	 dst-table="public.&quot;COUNTRY&quot;" reference-fk="country_fk"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="39.71" y="96.4677"/>
+	</label>
+</relationship>
+
+<relationship name="rel_CLIMATE_DISASTER_DISASTER" type="relfk" layers="0"
+	 src-table="public.&quot;CLIMATE_DISASTER&quot;"
+	 dst-table="public.&quot;DISASTER&quot;" reference-fk="disaster_fk"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="58.8128" y="55.0801"/>
+	</label>
+</relationship>
+
+<relationship name="rel_COUNTRY_SUB_REGION" type="relfk" layers="0"
+	 src-table="public.&quot;COUNTRY&quot;"
+	 dst-table="public.&quot;SUB_REGION&quot;" reference-fk="sub_region_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-116.207" y="-59.9323"/>
+	</label>
+</relationship>
+
+<relationship name="rel_SUB_REGION_REGION" type="relfk" layers="0"
+	 src-table="public.&quot;SUB_REGION&quot;"
+	 dst-table="public.&quot;REGION&quot;" reference-fk="region_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="48.46" y="54.343"/>
+	</label>
+</relationship>
+
+</dbmodel>
