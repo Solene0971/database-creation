@@ -9,9 +9,9 @@ L’objectif de ce projet était de concevoir une base de données relationnelle
 
 ## Livrables
 
-- Compte rendu PDF  
+- Compte rendu `PDF`  
 - Script de création de base de données (manuel)  
-- Script de création de base de données (généré par pgModeler)  
+- Script de création de base de données (généré par l'AGL)  
 - Script de peuplement de la base de données  
 - Fichiers `.csv` des données
 
